@@ -34,9 +34,7 @@ try {
 		
 		list.add(vo);
 	}
-} catch (Exception e) {
-
-}
+} catch (Exception e) {}
 %>
 
 
@@ -54,7 +52,7 @@ try {
 			<th>Country_Name</th>
 			<th>Region_ID</th>
 		</tr>
-		<% for(CountriesVO vo : list) {%>
+		<% for(CountriesVO vo : list) { %>
 		<tr>
 			<td><%=vo.getCountry_id() %></td>
             <td><%=vo.getCountry_name() %></td>
