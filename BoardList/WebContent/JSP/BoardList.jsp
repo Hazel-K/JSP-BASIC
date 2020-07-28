@@ -30,9 +30,9 @@
 		
 		while(rs.next()){ // 1부터 순차적으로 레코드가 있는지를 확인, true/false 리턴
 			int i_board = rs.getInt("i_board");
-			String title = rs.getNString("title");
+			String title = rs.getNString("title"); // NString UTF 유니코드 때문에 나온 것. String과 차이는 없지만 100% 문제가 없음
 			
-			BoardVO vo = new BoardVO();
+			BoardVO vo = new BoardVO(); // VO객체는 반드시 While문 안에 선언할 것
 			vo.setI_board(i_board);
 			vo.setTitle(title);
 			
@@ -57,7 +57,7 @@
 body {
 	display: flex;
 	flex-direction: column;
-	align-items: center; 
+	align-items: center;
 	justify-content: center;
 }
 table {
