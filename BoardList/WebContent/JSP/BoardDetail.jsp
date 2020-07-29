@@ -36,7 +36,7 @@
 			vo.setTitle(title);
 			vo.setCtnt(ctnt);
 			vo.setI_student(i_student);
-		}
+		} // while 문 끝
 		
 	} catch (Exception e) {
 		e.printStackTrace();
