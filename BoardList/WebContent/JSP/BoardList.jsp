@@ -44,7 +44,7 @@
 		if (rs != null) { try {rs.close();} catch(Exception e) {} }
 		if (ps != null) { try {ps.close();} catch(Exception e) {} }
 		if (con != null) { try {con.close();} catch(Exception e) {} }
-	}
+	} // 열었으면 닫아야 함. 연 순서의 반대로 닫아주어야 하므로 close();는 역순이 된다. close();는 따로 나눠놓는 것이 FM, 닫지 않으면 서버가 죽는다.
 	// 지역변수는 선언하는 곳에 따라 스코프(살아있는 범위)가 달라짐
 	// 메소드가 속하는 경로 (BoardList_jsp.java) 메소드, 전역 변수를 만들고 싶다면 무조건 ! 붙일 것
 %>
@@ -81,7 +81,8 @@ th, td {
         <% for(BoardVO vo : boardList) {%>
         <tr>
             <td><%=vo.getI_board()%></td>
-            <td><%=vo.getTitle()%></td>
+            <td><a href="/JSP/BoardDetail.jsp?i_board=<%=vo.getI_board()%>"><%=vo.getTitle()%></a></td>
+            <!-- href의 ? 뒷부분은 hashmap 스타일, key와 value를 통해 해당 데이터를 찾아낸다. query가 노출되냐 안되느냐에 따라 get, post방식으로 나뉜다. -->
         </tr>
         <%}%>
     </table>
