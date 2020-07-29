@@ -15,28 +15,27 @@
 	//메소드가 속하는 경로 (BoardList_jsp.java) 에 생성된 클래스 내부에 적혀 있음
 %>
 <%
-	BoardVO vo = new BoardVO();
 	String strI_board = request.getParameter("i_board"); // hashmap의 key 가져오기
 	String sql = "SELECT title, ctnt, i_student FROM t_board WHERE i_board = " + strI_board;
 
 	Connection con = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
+	BoardVO vo = new BoardVO();
 	
 	try {
 		con = getCon();
 		ps = con.prepareStatement(sql);
 		rs = ps.executeQuery();
 		
-		while(rs.next()) {
-			String title = rs.getNString("title");
-			String ctnt = rs.getNString("ctnt");
-			int i_student = rs.getInt("i_student");
+		rs.next();
+		String title = rs.getNString("title");
+		String ctnt = rs.getNString("ctnt");
+		int i_student = rs.getInt("i_student");
 			
-			vo.setTitle(title);
-			vo.setCtnt(ctnt);
-			vo.setI_student(i_student);
-		} // while 문 끝
+		vo.setTitle(title);
+		vo.setCtnt(ctnt);
+		vo.setI_student(i_student);
 		
 	} catch (Exception e) {
 		e.printStackTrace();
