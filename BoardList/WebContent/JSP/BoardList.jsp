@@ -21,7 +21,7 @@
 	PreparedStatement ps = null;
 	ResultSet rs = null;
 	
-	String sql = "SELECT i_board, title FROM t_board"; // CRUD 구문에 ; 을 허용하면 안됨, 인젝션 공격당함, 웬만하면 * 쓰면 안됨
+	String sql = "SELECT i_board, title FROM t_board ORDER BY i_board DESC"; // CRUD 구문에 ; 을 허용하면 안됨, 인젝션 공격당함, 웬만하면 * 쓰면 안됨
 
 	try {
 		con = getCon();
