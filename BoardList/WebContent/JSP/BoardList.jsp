@@ -60,9 +60,11 @@ body {
 	align-items: center;
 	justify-content: center;
 }
+
 table {
 	border-collapse: collapse;
 }
+
 th, td {
 	padding: 1em;
 	border: 1px solid black;
@@ -71,20 +73,23 @@ th, td {
 </style>
 </head>
 <body>
-	<div><h1>가나다리스트</h1></div>
+	<div>
+		<h1>가나다리스트</h1>
+	</div>
 	<table>
-        <tr>
-            <th>No</th>
-            <th>제목</th>
-        </tr>
-        
-        <% for(BoardVO vo : boardList) {%>
-        <tr>
-            <td><%=vo.getI_board()%></td>
-            <td><a href="/JSP/BoardDetail.jsp?i_board=<%=vo.getI_board()%>"><%=vo.getTitle()%></a></td>
-            <!-- href의 ? 뒷부분은 hashmap 스타일, key와 value를 통해 해당 데이터를 찾아낸다. query가 노출되냐 안되느냐에 따라 get, post방식으로 나뉜다. -->
-        </tr>
-        <%}%>
-    </table>
+		<tr>
+			<th>No</th>
+			<th>제목</th>
+		</tr>
+
+		<% for(BoardVO vo : boardList) {%>
+		<tr>
+			<td><%=vo.getI_board()%></td>
+			<td><a href="/JSP/BoardDetail.jsp?i_board=<%=vo.getI_board()%>"><%=vo.getTitle()%></a></td>
+			<!-- href의 ? 뒷부분은 hashmap 스타일, key와 value를 통해 해당 데이터를 찾아낸다. query가 노출되냐 안되느냐에 따라 get, post방식으로 나뉜다. -->
+		</tr>
+		<%}%>
+	</table>
+	<button onclick="location.href='BoardWrite.jsp'">글쓰기</button>
 </body>
 </html>
