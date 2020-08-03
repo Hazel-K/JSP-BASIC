@@ -79,6 +79,7 @@
 <body>
 	<div><a href="BoardList.jsp">리스트로 가기</a></div>
 	<div><a href="#" onclick="procDel(<%=i_board%>);">삭제</a></div>
+	<div><a href="BoardMod.jsp?i_board=<%=i_board%>">수정</a></div>
 	<div>번호 : <%=strI_board %></div>
 	<div>제목 : <%=vo.getTitle() %></div>
 	<div>작성자 : <%=nm %></div>

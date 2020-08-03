@@ -22,6 +22,11 @@
 	String strI_student = request.getParameter("i_student");
 	int i_student = 0;
 	
+	if("".equals(title) || "".equals(ctnt) || "".equals(strI_student)) {
+		response.sendRedirect("BoardWrite.jsp?err=10");
+		return;
+	}
+	
 	String sql = "INSERT INTO t_board(i_board, title, ctnt, i_student) "
 		+"SELECT nvl(MAX(i_board), 0) + 1, ?, ?, ?"
 		+"FROM t_board";
@@ -32,7 +37,6 @@
 	int rs = -1;
 	int idx = 0;
 	try {
-		
 		con = getCon();
 		ps = con.prepareStatement(sql);
 		
@@ -40,8 +44,8 @@
 		ps.setNString(2, ctnt);
 		i_student = Integer.parseInt(strI_student);
 		ps.setInt(3, i_student);
-		
 		rs = ps.executeUpdate();
+		
 		sql = "SELECT MAX(i_board) FROM t_board";
 		ps = con.prepareStatement(sql);
 		rs1 = ps.executeQuery();
@@ -56,5 +60,19 @@
 		if (ps != null) { try {ps.close();} catch (Exception e) {} }
 		if (con != null) { try {con.close();} catch (Exception e) {} }
 	}
-	response.sendRedirect("BoardDetail.jsp?i_board=" + idx);
+	
+	int err = 0;
+	switch(rs) {
+		case 1:
+			response.sendRedirect("BoardList.jsp");
+			return;
+		case 0:
+			err = 10;
+			break;
+		case -1:
+			err = 20;
+			break;
+	}	
+	response.sendRedirect("BoardWrite.jsp?err=" + err);
+	// response.sendRedirect("BoardDetail.jsp?i_board=" + idx);
 %>
