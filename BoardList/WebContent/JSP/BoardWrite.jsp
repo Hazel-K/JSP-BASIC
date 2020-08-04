@@ -77,6 +77,7 @@ body>div:nth-child(2) {
 				<input type="submit" value="글등록">
 			</div>
 		</form>
+		<a href="BoardList.jsp"><button>리스트로</button></a>
 	</div>
 	<script>
 		function eleValid(ele, nm) {

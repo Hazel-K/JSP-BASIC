@@ -20,29 +20,26 @@
 	String title = request.getParameter("title");
 	String ctnt = request.getParameter("ctnt");
 	String strI_student = request.getParameter("i_student");
-	int i_student = 0;
+	String strI_board = request.getParameter("i_board");
 	
 	if("".equals(title) || "".equals(ctnt) || "".equals(strI_student)) {
 		response.sendRedirect("BoardWrite.jsp?err=10");
 		return;
 	}
 	
-	String sql = "INSERT INTO t_board(i_board, title, ctnt, i_student) "
-		+"SELECT nvl(MAX(i_board),0) + 1, ?, ?, ?"
-		+"FROM t_board";
-	
+	String sql = "UPDATE t_board SET (title, ctnt, i_student) = (SELECT ?, ?, ? FROM dual) WHERE i_board = ?";
+		
 	Connection con = null;
 	PreparedStatement ps = null;
 	int rs = -1;
-	int idx = 0;
 	try {
 		con = getCon();
 		ps = con.prepareStatement(sql);
 		
 		ps.setNString(1, title);
 		ps.setNString(2, ctnt);
-		i_student = Integer.parseInt(strI_student);
-		ps.setInt(3, i_student);
+		ps.setInt(3, Integer.parseInt(strI_student));
+		ps.setInt(4, Integer.parseInt(strI_board));
 		rs = ps.executeUpdate();
 		
 	} catch (Exception e) {
@@ -66,6 +63,6 @@
 			err = 20;
 			break;
 	}	
-	response.sendRedirect("BoardWrite.jsp?err=" + err);
+	response.sendRedirect("BoardMod.jsp?err=" + err);
 	// response.sendRedirect("BoardDetail.jsp?i_board=" + idx);
 %>
